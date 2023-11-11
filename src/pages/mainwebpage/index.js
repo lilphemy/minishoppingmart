@@ -1,0 +1,110 @@
+import React, { useReducer, useContext, useState, useEffect, useLayoutEffect } from "react";
+import MainPagerView from "../../Components/productrendering/productsshowcase";
+import HeaderPagerView from "../../Components/headerpageview/headerview";
+import CartViewer from "../../Components/cartpageview/cartview";
+import { act } from "react-dom/test-utils";
+import useProductFetch from "../../dataBucket";
+
+let productCont = React.createContext("");
+let cartContext = React.createContext("");
+
+const dataLink = "https://course-api.com/javascript-store-products"
+
+
+const reducer = (state, action) => {
+
+    if (action.type === "LOAD_DATA") {
+        return { ...state, mallCont: action.payload }
+    }
+
+    if (action.type === "ADD_ITEM") {
+        const itemValue = state.mallCont.filter((unit) => unit.id === action.payload)
+
+        //let newList = [...action.payLoad];
+        //console.log(state.mallCont.filter((e) => e.fields.company))
+        console.log(Array.isArray(itemValue))
+
+        return {
+            ...state,
+            cartItems: [...state.cartItems, ...itemValue],
+            actionStatement: "item added",
+            cartCount: state.cartCount++,
+            priceTotal: state.priceTotal + itemValue[0].fields.price,
+        }
+    }
+
+    if(action.type === "OPEN_CART") {
+        return {...state, viewCart: !state.viewCart}
+    }
+
+    if(action.type === "CLOSE_CART") {
+        return {... state, viewCart: !state.viewCart}
+    }
+
+    throw new Error("action type a mystery")
+}
+
+const valueDefault = {
+    mallCont: [],
+    cartItems: [],
+    priceTotal: 0,
+    cartCount: 0,
+    actionStatement: "",
+    viewCart: false,
+}
+const newArray = []
+
+
+export function MoveProduct() {
+    return useContext(productCont)
+}
+function MainPageChal() {
+
+    const products = useProductFetch(dataLink)
+    const [state, dispatch] = useReducer(reducer, valueDefault)
+    //const { cartAllCont, setCartAllCont } = useState([...state.cartItems])
+
+    //dispatch({ type: "LOAD_DATA", payload: products})
+
+    const updateProduct = () => {
+        dispatch({ type: "LOAD_DATA", payload: products})
+    }
+    
+    const handleCart = (prodID) => {
+        dispatch({ type: "ADD_ITEM", payload: prodID, totalPriceSum: state.priceSum})
+        console.log(state.cartItems.length, state.cartItems)
+    }
+
+    const viewCart = () => {
+        dispatch({type: "OPEN_CART"})
+    }
+    
+    const closeCart = () => {
+        dispatch({type: "CLOSE_CART"})
+    }
+
+    const dataFetch = async () => {
+        const fetch_data = await fetch(dataLink);
+        const fetched_data = await fetch_data.json();
+        //setProduct(fetched_data)
+        dispatch({ type: "LOAD_DATA", payload: fetched_data})
+    }
+
+    useLayoutEffect(() => {
+        dataFetch()
+    }, [dataLink])
+
+
+    return (
+        <React.Fragment>
+                <cartContext.Provider value={handleCart}>
+                    <HeaderPagerView countBuck={state.cartCount} cartLogic = {viewCart}/>
+                    <MainPagerView dataCell={state.mallCont} handleCart ={handleCart}/>
+                    {state.viewCart && <CartViewer cartData={state.cartItems} cartDisp = {closeCart} totalPrice = {state.priceTotal}/>}
+                </cartContext.Provider>
+        </React.Fragment>
+    )
+
+}
+
+export { MainPageChal };

@@ -1,0 +1,33 @@
+
+.productSect {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80%;
+    padding: 1rem;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    margin-top: 10rem;
+    border: 2px solid cornflowerblue;
+    text-align: center;
+}
+
+.itemBlock {
+    background-color: whitesmoke;
+    padding: 2rem;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.imgStyle {
+    height: 250px;
+    width: 250px;
+    margin: 0.4rem;
+}
+
+.prodDetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
