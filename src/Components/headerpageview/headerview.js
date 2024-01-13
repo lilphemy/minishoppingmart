@@ -1,7 +1,8 @@
 import React from "react";
 import Classes from "./headerview.module.css"
+import { Link } from "react-router-dom";
 
-function HeaderPagerView({countBuck, cartLogic}) {
+function HeaderPagerView({ countBuck, cartLogic }) {
     return (
         <React.Fragment>
 
@@ -14,16 +15,22 @@ function HeaderPagerView({countBuck, cartLogic}) {
                 </div>
 
                 <div className={Classes.sectionalNavs}>
-                    <ul>
+                    {/* <ul>
                         <li><h4>mobile</h4></li>
                         <li><h4>fashion</h4></li>
                         <li><h4>computers</h4></li>
                         <li><h4>funitures</h4></li>
                         <li><h4>footwears</h4></li>
-                    </ul>
-                    <div className = {Classes.cartStyles} onClick={cartLogic}>
-                        <span className = {Classes.cartIcon}><i className="fa-solid fa-cart-arrow-down"></i><div className = {Classes.countBlock}>{countBuck}</div></span>
+                    </ul> */}
+                    <div className={Classes.cartStyles} onClick={cartLogic}>
+                        <span className={Classes.cartIcon}><i className="fa-solid fa-cart-arrow-down"></i><div className={Classes.countBlock}>{countBuck}</div></span>
                     </div>
+                    {/* <Link to="/cart">
+                        <div className={Classes.cartStyles} onClick={cartLogic}>
+                            <span className={Classes.cartIcon}><i className="fa-solid fa-cart-arrow-down"></i><div className={Classes.countBlock}>{countBuck}</div></span>
+                        </div>
+                    </Link> */}
+
                 </div>
             </nav>
 

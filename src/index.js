@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDom from "react-dom/client"
-import {MainPageChal} from "./pages/mainwebpage";
+import{BrowserRouter as Router} from "react-router-dom"
+import RouterPath from "./App";
+
 
 class PageViewer extends React.Component {
 
@@ -9,11 +11,15 @@ class PageViewer extends React.Component {
 
         return (
             <React.StrictMode>
+                <Router>
                 <React.Fragment>
-                    <main>
+                    <RouterPath/>
+                    {/* <main>
                         <MainPageChal/>
-                    </main>
+                    </main> */}
                 </React.Fragment>
+                </Router>
+                
             </React.StrictMode>
         )
     }

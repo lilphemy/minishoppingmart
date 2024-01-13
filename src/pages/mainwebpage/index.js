@@ -5,7 +5,7 @@ import CartViewer from "../../Components/cartpageview/cartview";
 import { act } from "react-dom/test-utils";
 import useProductFetch from "../../dataBucket";
 
-let productCont = React.createContext("");
+export let productCont = React.createContext("");
 let cartContext = React.createContext("");
 
 const dataLink = "https://course-api.com/javascript-store-products"
@@ -20,8 +20,6 @@ const reducer = (state, action) => {
     if (action.type === "ADD_ITEM") {
         const itemValue = state.mallCont.filter((unit) => unit.id === action.payload)
 
-        //let newList = [...action.payLoad];
-        //console.log(state.mallCont.filter((e) => e.fields.company))
         console.log(Array.isArray(itemValue))
 
         return {
@@ -33,12 +31,12 @@ const reducer = (state, action) => {
         }
     }
 
-    if(action.type === "OPEN_CART") {
-        return {...state, viewCart: !state.viewCart}
+    if (action.type === "OPEN_CART") {
+        return { ...state, viewCart: !state.viewCart }
     }
 
-    if(action.type === "CLOSE_CART") {
-        return {... state, viewCart: !state.viewCart}
+    if (action.type === "CLOSE_CART") {
+        return { ...state, viewCart: !state.viewCart }
     }
 
     throw new Error("action type a mystery")
@@ -52,12 +50,12 @@ const valueDefault = {
     actionStatement: "",
     viewCart: false,
 }
-const newArray = []
 
 
 export function MoveProduct() {
     return useContext(productCont)
 }
+
 function MainPageChal() {
 
     const products = useProductFetch(dataLink)
@@ -67,44 +65,46 @@ function MainPageChal() {
     //dispatch({ type: "LOAD_DATA", payload: products})
 
     const updateProduct = () => {
-        dispatch({ type: "LOAD_DATA", payload: products})
+        dispatch({ type: "LOAD_DATA", payload: products })
     }
-    
+
     const handleCart = (prodID) => {
-        dispatch({ type: "ADD_ITEM", payload: prodID, totalPriceSum: state.priceSum})
+        dispatch({ type: "ADD_ITEM", payload: prodID, totalPriceSum: state.priceSum })
         console.log(state.cartItems.length, state.cartItems)
     }
 
     const viewCart = () => {
-        dispatch({type: "OPEN_CART"})
+        dispatch({ type: "OPEN_CART" })
     }
-    
+
     const closeCart = () => {
-        dispatch({type: "CLOSE_CART"})
+        dispatch({ type: "CLOSE_CART" })
     }
 
     const dataFetch = async () => {
         const fetch_data = await fetch(dataLink);
         const fetched_data = await fetch_data.json();
         //setProduct(fetched_data)
-        dispatch({ type: "LOAD_DATA", payload: fetched_data})
+        dispatch({ type: "LOAD_DATA", payload: fetched_data })
     }
 
     useLayoutEffect(() => {
         dataFetch()
     }, [dataLink])
 
-
+    console.debug(state.mallCont)
     return (
         <React.Fragment>
+            <productCont.Provider value={state.cartItems}>
                 <cartContext.Provider value={handleCart}>
-                    <HeaderPagerView countBuck={state.cartCount} cartLogic = {viewCart}/>
-                    <MainPagerView dataCell={state.mallCont} handleCart ={handleCart}/>
+                    <HeaderPagerView countBuck={state.cartCount} cartLogic={viewCart} />
+                    <MainPagerView dataCell={state.mallCont} handleCart={handleCart} />
                     {state.viewCart && <CartViewer cartData={state.cartItems} cartDisp = {closeCart} totalPrice = {state.priceTotal}/>}
                 </cartContext.Provider>
+            </productCont.Provider>
         </React.Fragment>
     )
 
 }
 
-export { MainPageChal };
+export default MainPageChal; 

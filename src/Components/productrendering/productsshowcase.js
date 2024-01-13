@@ -2,8 +2,8 @@ import React from "react";
 import Classes from "./productshowcase.module.css"
 
 
-function MainPagerView({dataCell, handleCart}) {
-    
+function MainPagerView({ dataCell, handleCart }) {
+
 
     return (
         <React.Fragment>
@@ -15,16 +15,16 @@ function MainPagerView({dataCell, handleCart}) {
                         return (
                             <React.Fragment key={id}>
                                 <div className={Classes.itemBlock}>
-                                    <img className={Classes.imgStyle} src={image[0].url} alt = {name}></img>
-                                    <div className={Classes.prodDetails}>
-                                        <h4>{company}</h4>
-                                        <p>{featured}</p>
-                                    </div>
+                                    <img className={Classes.imgStyle} src={image[0].url} alt={name}></img>
                                     <div className={Classes.prodDetails}>
                                         <p>{name}</p>
                                         <p>${price}</p>
                                     </div>
-                                    <button onClick = {() => handleCart(id)} className = {Classes.itemButton} type = "button">add to cart</button>
+                                    <div className={Classes.compDetails}>
+                                        <h4>{company}</h4>
+                                    </div>
+
+                                    <button onClick={() => handleCart(id)} className={Classes.itemButton} type="button">add to cart</button>
                                 </div>
                             </React.Fragment>
                         )

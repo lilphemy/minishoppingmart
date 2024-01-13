@@ -1,8 +1,12 @@
-import React from "react"
+import React, {useContext} from "react"
 import Classes from "./cartview.module.css"
+import {MoveProduct} from "../../pages/mainwebpage"
+
 
 
 const CartViewer = function ({cartData, cartDisp, totalPrice}) {
+
+    //const dataWell = MoveProduct()
 
     return (
         <React.Fragment>
@@ -14,17 +18,19 @@ const CartViewer = function ({cartData, cartDisp, totalPrice}) {
                 </div>
                 <div className={Classes.cartSect}>
                     {
-                        cartData.map((unitData) => {
-
-                            const { id, fields } = unitData;
-
+                        cartData.map((unitData, index) => {
+                            const { id, fields: {company, featured, price, name, image} } = unitData;
+                            console.debug(name, price)
                             return (
-                                <React.Fragment key={id}>
+                                <React.Fragment key={index}>
                                     <div className={Classes.singleItem}>
-                                        <div className={Classes.imgStyles}><img src={fields.image[0].url} alt={fields.name}></img></div>
+                                        <div>
+                                            <span className={Classes.closeItemBtn}><i className="fa-solid fa-circle-xmark"></i></span>
+                                        </div>
+                                        <div className={Classes.imgStyles}><img src={image[0].url} alt={name}></img></div>
                                         <div className={Classes.itemDetails}>
-                                            <p>{fields.name}</p>
-                                            <p>{fields.price}</p>
+                                            <p>{name}</p>
+                                            <p>${price}</p>
                                         </div>
                                         <div className={Classes.selectionBtn}>
                                             <span className={Classes.iconBtn}><i className="fa-solid fa-caret-up"></i></span>
