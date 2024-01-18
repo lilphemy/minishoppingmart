@@ -19,9 +19,6 @@ const reducer = (state, action) => {
 
     if (action.type === "ADD_ITEM") {
         const itemValue = state.mallCont.filter((unit) => unit.id === action.payload)
-
-        console.log(Array.isArray(itemValue))
-
         return {
             ...state,
             cartItems: [...state.cartItems, ...itemValue],
@@ -64,14 +61,13 @@ function MainPageChal() {
 
     //dispatch({ type: "LOAD_DATA", payload: products})
 
-    const updateProduct = () => {
-        dispatch({ type: "LOAD_DATA", payload: products })
-    }
+    
 
     const handleCart = (prodID) => {
         dispatch({ type: "ADD_ITEM", payload: prodID, totalPriceSum: state.priceSum })
-        console.log(state.cartItems.length, state.cartItems)
     }
+
+    console.log(state.cartItems.length, state.cartItems)
 
     const viewCart = () => {
         dispatch({ type: "OPEN_CART" })
