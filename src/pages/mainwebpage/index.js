@@ -54,7 +54,7 @@ export function MoveProduct() {
 
 function MainPageChal() {
 
-    const products = useProductFetch(dataLink)
+    //const products = useProductFetch(dataLink)
     const [state, dispatch] = useReducer(reducer, valueDefault)
     //const { cartAllCont, setCartAllCont } = useState([...state.cartItems])
 
@@ -86,7 +86,7 @@ function MainPageChal() {
 
     useLayoutEffect(() => {
         dataFetch(dataLink)
-    }, [dataLink])
+    })
 
     console.debug(state.mallCont)
     return (

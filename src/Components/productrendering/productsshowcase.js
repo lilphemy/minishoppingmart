@@ -10,7 +10,7 @@ function MainPagerView({ dataCell, handleCart }) {
             <section className={Classes.productSect}>
                 {
                     dataCell.map((product) => {
-                        const { id, fields: { company, featured, colors, price, name, image } } = product;
+                        const { id, fields: { company, price, name, image } } = product;
 
                         return (
                             <React.Fragment key={id}>

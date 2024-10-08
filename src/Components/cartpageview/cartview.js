@@ -18,7 +18,7 @@ const CartViewer = function ({cartData, cartDisp, totalPrice}) {
                 <div className={Classes.cartSect}>
                     {
                         cartData.map((unitData, index) => {
-                            const { id, fields: {company, featured, price, name, image} } = unitData;
+                            const { fields: {price, name, image} } = unitData;
                             console.debug(name, price)
                             return (
                                 <React.Fragment key={index}>

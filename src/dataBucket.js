@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect} from "react";
+import {useState, useLayoutEffect} from "react";
 
 const useProductFetch = (datalink) => {
     const[product, setProduct] = useState([])
@@ -11,7 +11,7 @@ const useProductFetch = (datalink) => {
 
     useLayoutEffect(() => {
         dataFetch()
-    }, [datalink])
+    })
 
     return product
 }
