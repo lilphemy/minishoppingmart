@@ -2,7 +2,7 @@ import React, { useReducer, useContext, useLayoutEffect } from "react";
 import MainPagerView from "../../Components/productrendering/productsshowcase";
 import HeaderPagerView from "../../Components/headerpageview/headerview";
 import CartViewer from "../../Components/cartpageview/cartview";
-import useProductFetch from "../../dataBucket";
+//import useProductFetch from "../../dataBucket";
 
 export let productCont = React.createContext("");
 let cartContext = React.createContext("");
