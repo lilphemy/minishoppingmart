@@ -1,6 +1,5 @@
 import React from "react";
 import Classes from "./headerview.module.css"
-import { Link } from "react-router-dom";
 
 function HeaderPagerView({ countBuck, cartLogic }) {
     return (

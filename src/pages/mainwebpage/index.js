@@ -1,14 +1,13 @@
-import React, { useReducer, useContext, useState, useEffect, useLayoutEffect } from "react";
+import React, { useReducer, useContext, useLayoutEffect } from "react";
 import MainPagerView from "../../Components/productrendering/productsshowcase";
 import HeaderPagerView from "../../Components/headerpageview/headerview";
 import CartViewer from "../../Components/cartpageview/cartview";
-import { act } from "react-dom/test-utils";
 import useProductFetch from "../../dataBucket";
 
 export let productCont = React.createContext("");
 let cartContext = React.createContext("");
 
-const dataLink = "https://course-api.com/javascript-store-products"
+const dataLink = "javascript-store-products"
 
 
 const reducer = (state, action) => {
@@ -77,15 +76,16 @@ function MainPageChal() {
         dispatch({ type: "CLOSE_CART" })
     }
 
-    const dataFetch = async () => {
-        const fetch_data = await fetch(dataLink);
+    const dataFetch = async (linkvar) => {
+        const fetch_data = await fetch(linkvar);
         const fetched_data = await fetch_data.json();
+        console.log(fetch_data)
         //setProduct(fetched_data)
         dispatch({ type: "LOAD_DATA", payload: fetched_data })
     }
 
     useLayoutEffect(() => {
-        dataFetch()
+        dataFetch(dataLink)
     }, [dataLink])
 
     console.debug(state.mallCont)

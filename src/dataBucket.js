@@ -1,6 +1,4 @@
 import React, {useState, useEffect, useLayoutEffect} from "react";
-import { MoveProduct } from "./pages/mainwebpage";
-
 
 const useProductFetch = (datalink) => {
     const[product, setProduct] = useState([])

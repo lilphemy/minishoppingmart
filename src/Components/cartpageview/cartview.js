@@ -1,6 +1,5 @@
-import React, {useContext} from "react"
+import React from "react"
 import Classes from "./cartview.module.css"
-import {MoveProduct} from "../../pages/mainwebpage"
 
 
 
